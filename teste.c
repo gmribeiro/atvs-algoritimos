@@ -3,7 +3,7 @@
 
 int main(){
     int selecao;
-    float r = 0;
+    float r = 0, dinheiro;
     char parar;
     
     do {
@@ -43,29 +43,53 @@ int main(){
     } while (tolower(parar) == 'n');
 
     parar = 'n';
+    selecao = 0;
 
-    printf("\n\n\nO valor total do seu carrinho foi de: R$%f\n\n", r);
+    printf("\n\n\nO valor total do seu carrinho foi de: R$%.2f\n\n", r);
     printf("Como você gostaria de pagar?\n"
         "\n[1] - Dinheiro (A vista)\n"
         "[2] - Cartão de débito: (A vista)\n"
-        "[3] - Cartão de crédito (Parcelado)\n"
+        "[3] - Cartão de crédito (Parcelado)\n\n"
     );
+    scanf("%d", &selecao);
     
     do{
         switch (selecao) {
             case 1:
-            printf("Você escolheu dinheiro");
+            printf("\nVocê escolheu dinheiro\n");
             
+            printf("\nQuanto você tem para pagar em notas / moedas?\n");
+            scanf("%f", &dinheiro);
+
+            if (dinheiro < r){
+                printf("\nSaldo insuficiente, gostaria de parar?\n");
+                scanf(" %c", &parar);
+            } else {
+                printf("Pagamento aceito! Obrigado por comprar e volte sempre");
+                parar = 's';
+            }
+
             break;
 
             case 2:
             printf("Você escolheu cartão de debito");
+            scanf("%f", &dinheiro);
+
+            if (dinheiro < r){
+                printf("\nSaldo insuficiente, gostaria de tentar novamente?\n");
+                scanf(" %c", &parar);
+            } else {
+                printf("Pagamento aceito! Obrigado por comprar e volte sempre");
+            }
             
             break;
 
             case 3:
-            printf("Você escolheu cartão de crédito");
+            printf("\nVocê escolheu cartão de crédito\n");
+
+            printf("\nEm quantas parcelas você quer pagar?\n");
             
+
             break;
         }
     } while(tolower(parar) == 'n');
